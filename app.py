@@ -14,10 +14,10 @@ with center_content:
         st.image(image, width=250)
     except FileNotFoundError:
         st.warning("Logo JCAP non trouvé")
-    st.markdown("<h1 style='text-align: center;'>Macro Intelligence Dashboard</h1>", unsafe_allow_stdio=True)
+    st.markdown("<h1 style='text-align: center;'>Macro Intelligence Dashboard</h1>", unsafe_allow_html=True)
     st.markdown("<h5 style='text-align: center;'>Analyse croisée : Flux Social & Corpus Documentaire</h5>",
                 unsafe_allow_html=True)
-    
+
 st.markdown("---")
 
 # Données :
