@@ -1,15 +1,24 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from PIL import Image
 from pipeline import process_tweets, process_corpus
 
-# Configuration de la page
-st.set_page_config(page_title="Macro Analysis Dashboard", layout="wide")
+# Mise en place de la structure :
+st.set_page_config(page_title="JCAP - Macro Intelligence Dashboard", layout="wide")
+col_logo, col_title = st.columns([1, 6]) # Crée deux colonnes pour aligner logo et titre
 
-st.title("🌐 Macro Intelligence Dashboard")
+with col_logo:
+    try:
+        image = Image.open('jcap_logo.png')
+        st.image(image, width=100)
+    except FileNotFoundError:
+        st.warning("Logo JCAP non trouvé")
+
+st.title("🌐 Macro Intelligence Dashboard (faîtes défiler)")
 st.markdown("### Analyse croisée : Flux Social (Court Terme) & Corpus Documentaire (Long Terme)")
 
-# --- Chargement des données ---
+# Données :
 @st.cache_data
 def load_data():
     tweets = process_tweets('financial_juice_tweets.csv')
@@ -18,28 +27,25 @@ def load_data():
 
 df_tweets, df_corpus = load_data()
 
-# --- SIDEBAR ---
+# Sidebar :
 st.sidebar.header("Filtres")
 selected_theme = st.sidebar.multiselect("Filtrer par Thème", df_tweets['Theme'].unique(), default=df_tweets['Theme'].unique())
 
-# --- SECTION 1: SYNTHÈSE MACRO (DIGEST) ---
+# SYNTHÈSE MACRO :
 st.header("1. Executive Digest")
 col1, col2, col3 = st.columns(3)
 col1.metric("Thème Dominant du Marché", "Choc Pétrolier / Geopolitics")
 col2.metric("Consensus Principal", "Délai des baisses de taux (Fed)")
 col3.metric("Signal Faible Identifié", "Inflation Agricole (Cascade Trade)")
-
 st.info("**Digest:** L'escalade en Iran et la menace sur Ormuz ont provoqué un choc énergétique, ravivant les craintes inflationnistes. Cela force la Fed à repousser ses baisses de taux, faisant grimper les taux réels et chuter l'or. La divergence majeure réside dans la persistance de ce choc : purement énergétique, ou va-t-il se propager à l'alimentaire (blé/sucre) ?")
-
 st.markdown("---")
 
-# --- SECTION 2: ANALYSE DU CORPUS (LONG TERME) ---
+# ANALYSE DU CORPUS :
 st.header("2. Analyse du Corpus Documentaire")
 col_c1, col_c2 = st.columns([2, 1])
 
 with col_c1:
     st.subheader("Cartographie des Vues Macro")
-    # Affichage du tableau avec formatage
     st.dataframe(df_corpus, use_container_width=True)
 
 with col_c2:
@@ -49,11 +55,9 @@ with col_c2:
 
 st.markdown("---")
 
-# --- SECTION 3: FLUX SOCIAL (COURT TERME) ---
+# FLUX SOCIAL :
 st.header("3. Social Feed & Thématiques Émergentes (Financial Juice)")
-
 filtered_tweets = df_tweets[df_tweets['Theme'].isin(selected_theme)]
-
 col_t1, col_t2 = st.columns([1, 1])
 
 with col_t1:
@@ -65,7 +69,6 @@ with col_t1:
 
 with col_t2:
     st.subheader("Live Feed Interactif")
-    # Affichage d'un feed style "Twitter"
     for i, row in filtered_tweets.head(10).iterrows():
         st.markdown(f"**{row['author_name']}** - *{str(row['date'])[:10]}* | `[{row['Theme']}]`")
         st.write(f"> {row['content']}")

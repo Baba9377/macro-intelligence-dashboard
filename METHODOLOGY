@@ -1,13 +1,15 @@
-Objectif : Créer un pipeline robuste combinant la vélocité du flux social (court terme) et la profondeur du corpus documentaire (long terme).
+Objectif : Créer un pipeline robuste combinant le flux social (court terme) et le corpus documentaire (long terme).
 
 Choix Techniques :
 
-Langage & Framework : Python (standard industriel) et Streamlit pour le dashboard. Streamlit permet de générer une UI interactive de haute qualité en quelques heures, démontrant une excellente agilité.
+Langage & Framework : Python et Streamlit pour le dashboard. Streamlit permet de générer une interface interactive.
 
-Traitement du Langage Naturel (NLP) : * Flux Social (Tweets) : Utilisation d'analyses de sentiments (VADER/TextBlob) et d'extraction de mots-clés (TF-IDF) pour capter le pouls du marché en temps réel.
+Traitement du Langage Naturel :
 
-Corpus (PDFs) : Extraction de texte via PyPDF2 ou pdfplumber. Pour un MVP de 4h, l'identification des thèmes se fait par recherche de mots-clés pondérés (NER - Named Entity Recognition via spaCy), simulant l'action d'un LLM.
+- Flux Social (Tweets) : Utilisation d'analyses de sentiments (VADER/TextBlob) et d'extraction de mots-clés (TF-IDF) pour capter les variations du marché en temps réel.
 
-Restitution Visuelle : Plotly pour des graphiques interactifs (séries temporelles pour les tweets, graphiques en radar ou barres pour les thèmes des documents).
+- Corpus (PDF) : Extraction de texte. L'identification des thèmes se fait par recherche de mots-clés, simulant l'action d'un LLM.
 
-Arbitrages : Dans un délai de 3-4h, il est impossible de fine-tuner un modèle d'IA complexe. L'arbitrage a été de privilégier un pipeline end-to-end fonctionnel (de la donnée brute au dashboard) avec des heuristiques NLP solides, plutôt qu'un modèle parfait mais non déployé.
+- Restitution Visuelle : Plotly pour des graphiques interactifs (séries temporelles pour les tweets, barres pour les thèmes des documents).
+
+- Arbitrages : Dans un délai de 3-4h, il m'a été difficile de constituer un modèle d'IA complexe. J'ai privilégié un pipeline fonctionnel (de la donnée au dashboard), plutôt qu'un modèle parfait mais non déployé. Avec plus de temps j'auras peut-être pu mettre en place un algorithme de ML ou même un réseau de neuronnes réutilisables et capable d'apprendre de chaque document afin d'apporter des analyses de plus en plus fines.
