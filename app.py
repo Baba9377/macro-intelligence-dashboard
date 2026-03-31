@@ -6,17 +6,20 @@ from pipeline import process_tweets, process_corpus
 
 # Mise en place de la structure :
 st.set_page_config(page_title="JCAP - Macro Intelligence Dashboard", layout="wide")
-left_spacer, center_content, right_spacer = st.columns([1, 2, 1])
+LOGO_IMAGE = "jcap_logo.png"
 
-with center_content:
-    try:
-        image = Image.open('jcap_logo.png')
-        st.image(image, width=250)
-    except FileNotFoundError:
-        st.warning("Logo JCAP non trouvé")
-    st.markdown("<h1 style='text-align: center;'>Macro Intelligence Dashboard</h1>", unsafe_allow_html=True)
-    st.markdown("<h5 style='text-align: center;'>Analyse croisée : Flux Social & Corpus Documentaire</h5>",
-                unsafe_allow_html=True)
+import base64
+
+def get_image_base64(path):
+    with open(path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode()
+    return encoded
+
+try:
+    logo_b64 = get_image_base64(LOGO_IMAGE)
+    st.markdown(f"""<div style="text-align: center;"><img src="data:image/png;base64,{logo_b64}" width="250" style="margin-bottom: 20px;"><h1 style="margin-top: 0;">Macro Intelligence Dashboard</h1><h5>Analyse croisée : Flux Social & Corpus Documentaire</h5></div>""",unsafe_allow_html=True)
+except FileNotFoundError:
+    st.warning("Logo JCAP non trouvé")
 
 st.markdown("---")
 
