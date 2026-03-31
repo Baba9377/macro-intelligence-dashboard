@@ -1,0 +1,17 @@
+# Macro Intelligence Prototype
+
+Ce repository contient le test technique pour le poste de stage en analyse macroéconomique.
+L'objectif est de fournir une analyse croisée entre un flux court terme (Tweets Financial Juice) et un corpus long terme (Rapports de recherche institutionnelle).
+
+## Structure du projet
+- `app.py` : L'application front-end (Dashboard interactif sous Streamlit).
+- `pipeline.py` : Le moteur de traitement des données (ETL, NLP, extraction de thèmes).
+- `METHODOLOGY.md` : Courte note expliquant les choix techniques et d'architecture.
+- `financial_juice_tweets.csv` : Données brutes (flux social).
+
+## Installation & Lancement
+
+1. Cloner le repo :
+   ```bash
+   git clone [URL_DU_REPO]
+   cd macro-prototype
