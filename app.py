@@ -6,17 +6,19 @@ from pipeline import process_tweets, process_corpus
 
 # Mise en place de la structure :
 st.set_page_config(page_title="JCAP - Macro Intelligence Dashboard", layout="wide")
-col_logo, col_title = st.columns([1, 6]) # Crée deux colonnes pour aligner logo et titre
+left_spacer, center_content, right_spacer = st.columns([1, 2, 1])
 
-with col_logo:
+with center_content:
     try:
         image = Image.open('jcap_logo.png')
-        st.image(image, width=100)
+        st.image(image, width=250)
     except FileNotFoundError:
         st.warning("Logo JCAP non trouvé")
-
-st.title("🌐 Macro Intelligence Dashboard (faîtes défiler)")
-st.markdown("### Analyse croisée : Flux Social (Court Terme) & Corpus Documentaire (Long Terme)")
+    st.markdown("<h1 style='text-align: center;'>Macro Intelligence Dashboard</h1>", unsafe_allow_stdio=True)
+    st.markdown("<h5 style='text-align: center;'>Analyse croisée : Flux Social & Corpus Documentaire</h5>",
+                unsafe_allow_html=True)
+    
+st.markdown("---")
 
 # Données :
 @st.cache_data
