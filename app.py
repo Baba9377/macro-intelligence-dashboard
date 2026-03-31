@@ -17,7 +17,7 @@ def get_image_base64(path):
 
 try:
     logo_b64 = get_image_base64(LOGO_IMAGE)
-    st.markdown(f"""<div style="text-align: center;"><img src="data:image/png;base64,{logo_b64}" width="250" style="margin-bottom: 20px;"><h1 style="margin-top: 0;">Macro Intelligence Dashboard</h1><h5>Analyse croisée : Flux Social & Corpus Documentaire</h5></div>""",unsafe_allow_html=True)
+    st.markdown(f"""<div style="text-align: center;"><img src="data:image/png;base64,{logo_b64}" width="500" style="margin-bottom: 10px;"><h1 style="margin-top: 0;">Macro Intelligence Dashboard</h1><h5>Analyse croisée : Flux Social & Corpus Documentaire</h5></div>""",unsafe_allow_html=True)
 except FileNotFoundError:
     st.warning("Logo JCAP non trouvé")
 
