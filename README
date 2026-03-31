@@ -13,5 +13,11 @@ L'objectif est de fournir une analyse croisée entre un flux court terme (Tweets
 
 1. Cloner le repo :
    ```bash
-   git clone git clone https://github.com/Baba9377/macro-intelligence-dashboard.git
+   pip install streamlit
+   git clone https://github.com/Baba9377/macro-intelligence-dashboard.git
    cd macro-intelligence-dashboard
+   python -m venv venv
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+   .\venv\Scripts\activate
+   pip install pandas plotly streamlit
+   streamlit run app.py
